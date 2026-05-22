@@ -9,10 +9,12 @@ type SplitButtonProps = {
 
 export function SplitButton({ children, className = '', href = '#contact', mobileChildren }: SplitButtonProps) {
   return (
+    // Общий CTA-компонент: левая часть с текстом и отдельный круг со стрелкой.
     <a className={`split-button ${className}`.trim()} href={href}>
       <span className="split-button__text">
         {mobileChildren ? (
           <>
+            {/* Для отдельных кнопок текст на desktop/mobile отличается, стили переключают нужную версию. */}
             <span className="split-button__label split-button__label--desktop">{children}</span>
             <span className="split-button__label split-button__label--mobile">{mobileChildren}</span>
           </>

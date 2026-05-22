@@ -1,0 +1,144 @@
+.audience {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 809px;
+  background: #dfeaf4;
+  position: relative;
+  bottom: 40px;
+}
+
+.audience h2 {
+  position: absolute;
+  z-index: 2;
+  left: 40px;
+  margin: 0;
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 1.1;
+  letter-spacing: -0.015rem;
+  top: 120px;
+  max-width: 840px;
+}
+
+.audience__photo {
+  position: relative;
+  height: 809px;
+}
+
+.audience__image-mask {
+  --audience-image-scale: 1;
+  --audience-image-x: 0px;
+     --audience-image-y: 195px;
+
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.audience__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: calc(50% + var(--audience-image-x)) calc(50% + var(--audience-image-y));
+  transform: scale(var(--audience-image-scale));
+  transform-origin: center;
+}
+
+.audience__slider {
+  display: flex;
+  gap: 8px;
+}
+
+.audience__slider button {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--color-blue);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.audience__slider button:hover,
+.audience__slider button:focus-visible {
+  background: var(--color-blue);
+  color: #fff;
+}
+
+.audience__slider button:active {
+  opacity: 0.86;
+}
+
+.audience__slider img {
+  width: 9px;
+  height: 16px;
+  transition: filter 0.2s ease;
+}
+
+.audience__slider button:hover img,
+.audience__slider button:focus-visible img {
+  filter: brightness(0) invert(1);
+}
+
+.audience__cards {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.audience__card {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+  min-height: 136px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.46);
+  border-radius: 24px;
+  backdrop-filter: blur(14px);
+}
+
+.audience__overlay {
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  bottom: 38px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.audience__card:nth-child(2) {
+  background: #fff;
+}
+
+.audience__card h3 {
+  margin: 0;
+  color: var(--color-blue);
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+.audience__card p {
+  margin: 0;
+  color: var(--color-muted);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.audience__card:nth-child(1) p,
+.audience__card:nth-child(3) p {
+  color: #fff;
+}

@@ -1,0 +1,49 @@
+.solution {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+      gap: 73px;
+  padding: 0 40px 120px;
+  background: var(--color-page);
+  text-align: center;
+}
+
+.solution__jars {
+  display: block;
+  width: 736px;
+  height: 383px;
+      position: relative;
+    left: -20px;
+  object-fit: contain;
+}
+
+.solution__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.solution h2 {
+  max-width: 845px;
+  margin: 0 auto;
+  color: var(--color-blue);
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 0.9;
+  text-align: center;
+}
+
+.solution p {
+  max-width: 620px;
+  margin: 0 auto;
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.solution .split-button {
+  margin: 0 auto;
+}
