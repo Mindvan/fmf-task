@@ -5,12 +5,14 @@ const textPairFields = [
     name: 'title',
     title: 'Заголовок',
     type: 'string',
+    validation: (Rule) => Rule.required(),
   }),
   defineField({
     name: 'text',
     title: 'Текст',
     type: 'text',
     rows: 3,
+    validation: (Rule) => Rule.required(),
   }),
 ]
 
@@ -20,11 +22,13 @@ const imageFields = [
     title: 'Изображение',
     type: 'image',
     options: {hotspot: true},
+    validation: (Rule) => Rule.required(),
   }),
   defineField({
     name: 'imageAlt',
     title: 'Alt-текст изображения',
     type: 'string',
+    validation: (Rule) => Rule.required(),
   }),
 ]
 

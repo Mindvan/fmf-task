@@ -111,6 +111,23 @@ const landingPageQuery = `*[_type == "landingPage"][0]{
 
 const keepArray = <T>(value: T[] | undefined, fallback: T[]) => (value?.length ? value : fallback)
 
+const mergeFilled = <T extends Record<string, unknown>>(fallback: T, value?: Partial<T>): T => {
+  const merged: Record<string, unknown> = { ...fallback }
+
+  Object.entries(value ?? {}).forEach(([key, item]) => {
+    if (typeof item === 'string') {
+      if (item.trim()) merged[key] = item
+      return
+    }
+
+    if (item !== undefined && item !== null) {
+      merged[key] = item
+    }
+  })
+
+  return merged as T
+}
+
 const mergePair = (value: Partial<TextPair> | undefined, fallback: TextPair): TextPair => ({
   title: value?.title || fallback.title,
   text: value?.text || fallback.text,
@@ -124,65 +141,43 @@ export async function getLandingPageData(): Promise<LandingPageData> {
   return {
     navItems: keepArray(data.navItems, defaultLandingPageData.navItems),
     hero: {
-      ...defaultLandingPageData.hero,
-      ...data.hero,
+      ...mergeFilled(defaultLandingPageData.hero, data.hero),
       meta: keepArray(data.hero?.meta, defaultLandingPageData.hero.meta),
     },
-    productIntro: {
-      ...defaultLandingPageData.productIntro,
-      ...data.productIntro,
-    },
+    productIntro: mergeFilled(defaultLandingPageData.productIntro, data.productIntro),
     benefits: {
-      ...defaultLandingPageData.benefits,
-      ...data.benefits,
+      ...mergeFilled(defaultLandingPageData.benefits, data.benefits),
       cards: keepArray(data.benefits?.cards, defaultLandingPageData.benefits.cards).map((card, index) => ({
         title: card.title || defaultLandingPageData.benefits.cards[index]?.title || '',
         text: card.text || defaultLandingPageData.benefits.cards[index]?.text || '',
         icon: card.iconUrl || defaultLandingPageData.benefits.cards[index]?.icon,
       })),
     },
-    solution: {
-      ...defaultLandingPageData.solution,
-      ...data.solution,
-    },
+    solution: mergeFilled(defaultLandingPageData.solution, data.solution),
     composition: {
-      ...defaultLandingPageData.composition,
-      ...data.composition,
+      ...mergeFilled(defaultLandingPageData.composition, data.composition),
       items: keepArray(data.composition?.items, defaultLandingPageData.composition.items),
     },
     audience: {
-      ...defaultLandingPageData.audience,
-      ...data.audience,
+      ...mergeFilled(defaultLandingPageData.audience, data.audience),
       cards: keepArray(data.audience?.cards, defaultLandingPageData.audience.cards),
     },
     compare: {
-      ...defaultLandingPageData.compare,
-      ...data.compare,
+      ...mergeFilled(defaultLandingPageData.compare, data.compare),
       paragraphs: keepArray(data.compare?.paragraphs, defaultLandingPageData.compare.paragraphs),
       leftFact: mergePair(data.compare?.leftFact, defaultLandingPageData.compare.leftFact),
       rightFact: mergePair(data.compare?.rightFact, defaultLandingPageData.compare.rightFact),
     },
     purchase: {
-      ...defaultLandingPageData.purchase,
-      ...data.purchase,
+      ...mergeFilled(defaultLandingPageData.purchase, data.purchase),
       manualSteps: keepArray(data.purchase?.manualSteps, defaultLandingPageData.purchase.manualSteps),
     },
     faq: keepArray(data.faq, defaultLandingPageData.faq),
     contact: {
-      ...defaultLandingPageData.contact,
-      ...data.contact,
-      formLabels: {
-        ...defaultLandingPageData.contact.formLabels,
-        ...data.contact?.formLabels,
-      },
-      formPlaceholders: {
-        ...defaultLandingPageData.contact.formPlaceholders,
-        ...data.contact?.formPlaceholders,
-      },
-      socials: {
-        ...defaultLandingPageData.contact.socials,
-        ...data.contact?.socials,
-      },
+      ...mergeFilled(defaultLandingPageData.contact, data.contact),
+      formLabels: mergeFilled(defaultLandingPageData.contact.formLabels, data.contact?.formLabels),
+      formPlaceholders: mergeFilled(defaultLandingPageData.contact.formPlaceholders, data.contact?.formPlaceholders),
+      socials: mergeFilled(defaultLandingPageData.contact.socials, data.contact?.socials),
     },
   }
 }
