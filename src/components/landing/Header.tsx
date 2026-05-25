@@ -2,9 +2,12 @@ import { useState } from 'react'
 
 import { SplitButton } from '../SplitButton'
 import { fmfLogo, korIcon } from './assets'
-import { navItems } from './data'
 
-export function Header() {
+type HeaderProps = {
+  navItems: string[]
+}
+
+export function Header({ navItems }: HeaderProps) {
   // Состояние управляет мобильной шторкой меню и CSS-анимацией бургер-кнопки в крестик.
   const [menuOpen, setMenuOpen] = useState(false)
 

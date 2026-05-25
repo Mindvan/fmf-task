@@ -1,23 +1,28 @@
 import { SplitButton } from '../SplitButton'
 import { sus1 } from './assets'
+import type { LandingPageData } from './data'
 
-export function ProductIntro() {
+type ProductIntroProps = {
+  data: LandingPageData['productIntro']
+}
+
+export function ProductIntro({ data }: ProductIntroProps) {
   return (
     <section className="intro" id="о-продукте">
-      <h2 className="intro__title">Комплекс для тех, кто хочет свободно двигаться и заботиться о своих суставах каждый день</h2>
+      <h2 className="intro__title">{data.title}</h2>
       <div className="intro__grid">
         {/* Иллюстрация и текстовая колонка разделены, чтобы на адаптиве менять только сетку/gap. */}
-        <img className="intro__image" src={sus1} alt="Визуализация сустава" />
+        <img className="intro__image" src={data.image || sus1} alt={data.imageAlt} />
         <div className="intro__text">
           <div className="intro__copy">
-          <h3>Комплекс для ежедневной нутритивной поддержки суставов и естественного обновления хрящевой ткани, помогающий сохранять подвижность и комфорт при активном образе жизни</h3>
+          <h3>{data.subtitle}</h3>
           <p>
             {/* Тексты desktop/mobile отличаются по макету, переключение сделано CSS-классами. */}
-            <span className="responsive-copy responsive-copy--desktop">Это сбалансированный комплекс витаминов и микроэлементов, разработанный для ежедневного приема. Он обеспечивает питание суставов и стимулирует восстановление хряща, что дарит вам свободу движений без дискомфорта даже при высоких физических нагрузках.</span>
-            <span className="responsive-copy responsive-copy--mobile">Комплекс для ежедневной нутритивной поддержки суставов и естественного обновления хрящевой ткани, помогающий сохранять подвижность и комфорт при активном образе жизни</span>
+            <span className="responsive-copy responsive-copy--desktop">{data.textDesktop}</span>
+            <span className="responsive-copy responsive-copy--mobile">{data.textMobile}</span>
           </p>
           </div>
-          <SplitButton>Оставить заявку</SplitButton>
+          <SplitButton>{data.button}</SplitButton>
         </div>
       </div>
     </section>

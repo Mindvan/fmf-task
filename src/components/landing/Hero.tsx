@@ -1,33 +1,40 @@
 import { SplitButton } from '../SplitButton'
 import { Header } from './Header'
 import { jarMain } from './assets'
+import type { LandingPageData } from './data'
 
-export function Hero() {
+type HeroProps = {
+  data: LandingPageData['hero']
+  navItems: string[]
+}
+
+export function Hero({ data, navItems }: HeroProps) {
   return (
     <section className="hero" id="hero">
-      <Header />
+      <Header navItems={navItems} />
       <div className="hero__content">
         {/* Левый контент собран группами, чтобы gap-ами держать desktop и mobile структуру без лишних margin. */}
         <div className="hero__left">
           <div className="hero__main">
-          <h1 className="hero__title">Свобода движения</h1>
+          <h1 className="hero__title">{data.title}</h1>
           <div className="hero__line"></div>
             <div className="hero__lead-action">
-          <p className="hero__lead">«Complex SW СУСТАВЫ» порошок для опорно-двигательного аппарата</p>
+          <p className="hero__lead">{data.lead}</p>
         <p className="hero__meta">
-          <span>420г. / 30 порций</span>
-          <span>Месячный курс</span>
+          {data.meta.map((item) => (
+            <span key={item}>{item}</span>
+          ))}
         </p>
-          <SplitButton className="hero__button">Купить в 1 клик</SplitButton>
+          <SplitButton className="hero__button">{data.button}</SplitButton>
             </div>
           </div>
           <div className="hero__capsules">
-            <strong>1 порция = 17 обычных капсул</strong>
-            <span>Комплекс, который питает суставы изнутри и способствует обновлению хрящевой ткани</span>
+            <strong>{data.capsuleTitle}</strong>
+            <span>{data.capsuleText}</span>
           </div>
         </div>
         {/* Центральная банка остается отдельным слоем, чтобы CSS мог независимо позиционировать ее на разных ширинах. */}
-        <img className="hero__jar" src={jarMain} alt="Complex SW СУСТАВЫ" />
+        <img className="hero__jar" src={data.image || jarMain} alt={data.imageAlt} />
       </div>
     </section>
   )

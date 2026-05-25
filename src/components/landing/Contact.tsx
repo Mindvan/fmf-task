@@ -1,26 +1,38 @@
 import { SplitButton } from '../SplitButton'
 import { fmfLogoDark, maxLogo, telegramLogo, vkLogo, whatsappLogo } from './assets'
+import type { LandingPageData } from './data'
 
-export function Contact() {
+type ContactProps = {
+  data: LandingPageData['contact']
+}
+
+export function Contact({ data }: ContactProps) {
+  const socials = [
+    { icon: telegramLogo, label: 'Telegram', url: data.socials.telegram },
+    { icon: maxLogo, label: 'Max', url: data.socials.max },
+    { icon: whatsappLogo, label: 'WhatsApp', url: data.socials.whatsapp },
+    { icon: vkLogo, label: 'VK', url: data.socials.vk },
+  ]
+
   return (
     <footer className="contact" id="contact">
       {/* Верхняя панель футера: заголовок, контакты и форма находятся в одном визуальном блоке. */}
       <div className="contact__panel">
-        <h2 className="contact__title">Остались вопросы? Напишите нам</h2>
+        <h2 className="contact__title">{data.title}</h2>
         <div className="contact__content">
           <div className="contact__aside">
-          <h2>Остались вопросы? Напишите нам</h2>
+          <h2>{data.title}</h2>
           <div className="contact__channel">
-            <span>Эл. почта</span>
-            <a href="mailto:info@test.ru">info@test.ru</a>
+            <span>{data.emailLabel}</span>
+            <a href={`mailto:${data.email}`}>{data.email}</a>
           </div>
           <div className="contact__channel">
-            <span>Мессенджеры</span>
+            <span>{data.messengersLabel}</span>
             <div className="contact__socials">
               {/* Один шаблон ссылки для всех мессенджеров, различается только иконка. */}
-              {[telegramLogo, maxLogo, whatsappLogo, vkLogo].map((icon) => (
-                <a href="#contact" key={icon} aria-label="Мессенджер">
-                  <img src={icon} alt="" />
+              {socials.map((social) => (
+                <a href={social.url || '#contact'} key={social.label} aria-label={social.label}>
+                  <img src={social.icon} alt="" />
                 </a>
               ))}
             </div>
@@ -31,41 +43,41 @@ export function Contact() {
             <div className="contact__fields">
           {/* id/name на полях нужны для доступности, автозаполнения и отсутствия warning в инспекторе. */}
           <label htmlFor="contact-name">
-            Имя
-            <input id="contact-name" name="name" placeholder="Как к вам обращаться" />
+            {data.formLabels.name}
+            <input id="contact-name" name="name" placeholder={data.formPlaceholders.name} />
           </label>
           <label htmlFor="contact-phone">
-            Телефон
-            <input id="contact-phone" name="phone" placeholder="+7 (___) __-__-__" />
+            {data.formLabels.phone}
+            <input id="contact-phone" name="phone" placeholder={data.formPlaceholders.phone} />
           </label>
           <label htmlFor="contact-email">
-            Эл. почта
-            <input id="contact-email" name="email" placeholder="Ваша эл.почта" />
+            {data.formLabels.email}
+            <input id="contact-email" name="email" placeholder={data.formPlaceholders.email} />
           </label>
             </div>
           {/* Чекбокс оставлен настоящим input, визуальная галочка рисуется CSS. */}
           <label className="contact__agree">
             <input id="contact-agree" name="agreement" type="checkbox" />
-            <span>Я даю свое согласие на обработку персональных данных</span>
+            <span>{data.agreement}</span>
           </label>
           </div>
-          <SplitButton>Оставить заявку</SplitButton>
+          <SplitButton>{data.button}</SplitButton>
         </form>
       </div>
       </div>
       {/* Нижний футер отдельно от формы: на mobile порядок блоков меняется через CSS. */}
       <div className="contact__bottom">
         <div>
-          <p>© 2026, Оптисалт</p>
-          <p>Все права защищены</p>
+          <p>{data.copyright}</p>
+          <p>{data.rights}</p>
         </div>
         <div className="contact__brand">
           <img src={fmfLogoDark} alt="FMF" />
-          <p>БАД. Не является лекарственным средством. Требуется консультация специалиста</p>
+          <p>{data.disclaimer}</p>
         </div>
         <div>
-          <a href="#contact">Оферта</a>
-          <a href="#contact">Политика конфиденциальности</a>
+          <a href="#contact">{data.offer}</a>
+          <a href="#contact">{data.privacy}</a>
         </div>
       </div>
     </footer>

@@ -1,5 +1,6 @@
 .purchase {
   display: flex;
+  justify-content: center;
   gap: 24px;
   padding: 83px 40px 120px;
   background: var(--color-page);

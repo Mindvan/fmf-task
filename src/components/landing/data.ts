@@ -1,5 +1,128 @@
 import { health1, health2, health3, health4, health5 } from './assets'
 
+export type FeatureCard = {
+  title: string
+  text: string
+  icon?: string
+}
+
+export type TextPair = {
+  title: string
+  text: string
+}
+
+export type FaqItem = {
+  question: string
+  answer: string
+  open?: boolean
+}
+
+export type LandingPageData = {
+  navItems: string[]
+  hero: {
+    title: string
+    lead: string
+    meta: string[]
+    button: string
+    capsuleTitle: string
+    capsuleText: string
+    image?: string
+    imageAlt: string
+  }
+  productIntro: {
+    title: string
+    subtitle: string
+    textDesktop: string
+    textMobile: string
+    button: string
+    image?: string
+    imageAlt: string
+  }
+  benefits: {
+    title: string
+    textDesktop: string
+    textMobile: string
+    image?: string
+    imageAlt: string
+    cards: FeatureCard[]
+  }
+  solution: {
+    title: string
+    text: string
+    button: string
+    image?: string
+    imageAlt: string
+  }
+  composition: {
+    title: string
+    titleAccent: string
+    image?: string
+    imageAlt: string
+    button: string
+    mobileButton: string
+    items: TextPair[]
+  }
+  audience: {
+    title: string
+    image?: string
+    imageAlt: string
+    cards: TextPair[]
+  }
+  compare: {
+    title: string
+    paragraphs: string[]
+    image?: string
+    mobileImage?: string
+    imageAlt: string
+    leftFact: TextPair
+    rightFact: TextPair
+    button: string
+  }
+  purchase: {
+    title: string
+    price: string
+    meta: string
+    button: string
+    productImage?: string
+    productImageAlt: string
+    manualTitle: string
+    manualImage?: string
+    manualMobileImage?: string
+    manualImageAlt: string
+    manualSteps: string[]
+  }
+  faq: FaqItem[]
+  contact: {
+    title: string
+    emailLabel: string
+    email: string
+    messengersLabel: string
+    formLabels: {
+      name: string
+      phone: string
+      email: string
+    }
+    formPlaceholders: {
+      name: string
+      phone: string
+      email: string
+    }
+    agreement: string
+    button: string
+    copyright: string
+    rights: string
+    disclaimer: string
+    offer: string
+    privacy: string
+    socials: {
+      telegram?: string
+      max?: string
+      whatsapp?: string
+      vk?: string
+    }
+  }
+}
+
 // Навигация хранится отдельно, чтобы header оставался только разметкой и состоянием меню.
 export const navItems = ['О продукте', 'Состав', 'Для кого', 'Цена', 'Вопросы']
 
@@ -59,3 +182,113 @@ export const faq: Array<[string, boolean]> = [
   ['Почему в форме порошка, а не капсул?', false],
   ['Какие показания для приема комплекса', false],
 ]
+
+export const defaultLandingPageData: LandingPageData = {
+  navItems,
+  hero: {
+    title: 'Свобода движения',
+    lead: '«Complex SW СУСТАВЫ» порошок для опорно-двигательного аппарата',
+    meta: ['420г. / 30 порций', 'Месячный курс'],
+    button: 'Купить в 1 клик',
+    capsuleTitle: '1 порция = 17 обычных капсул',
+    capsuleText: 'Комплекс, который питает суставы изнутри и способствует обновлению хрящевой ткани',
+    imageAlt: 'Complex SW СУСТАВЫ',
+  },
+  productIntro: {
+    title: 'Комплекс для тех, кто хочет свободно двигаться и заботиться о своих суставах каждый день',
+    subtitle:
+      'Комплекс для ежедневной нутритивной поддержки суставов и естественного обновления хрящевой ткани, помогающий сохранять подвижность и комфорт при активном образе жизни',
+    textDesktop:
+      'Это сбалансированный комплекс витаминов и микроэлементов, разработанный для ежедневного приема. Он обеспечивает питание суставов и стимулирует восстановление хряща, что дарит вам свободу движений без дискомфорта даже при высоких физических нагрузках.',
+    textMobile:
+      'Комплекс для ежедневной нутритивной поддержки суставов и естественного обновления хрящевой ткани, помогающий сохранять подвижность и комфорт при активном образе жизни',
+    button: 'Оставить заявку',
+    imageAlt: 'Визуализация сустава',
+  },
+  benefits: {
+    title:
+      'Представьте, что вы каждый день даете своим суставам «витамин бодрости», который помогает им оставаться гибкими и здоровыми.',
+    textDesktop:
+      'Благодаря поддержке естественных процессов обновления тканей, вы забываете о скованности и с легкостью наслаждаетесь любимым спортом или прогулками.',
+    textMobile:
+      'Комплекс для ежедневной нутритивной поддержки суставов и естественного обновления хрящевой ткани, помогающий сохранять подвижность и комфорт при активном образе жизни',
+    imageAlt: 'Complex SW СУСТАВЫ',
+    cards: featureCards,
+  },
+  solution: {
+    title: 'Питаем. Восстанавливаем. Сохраняем подвижность.',
+    text: 'БАД «Complex SW СУСТАВЫ» от Оптисалт решает три главные задачи здоровья суставов',
+    button: 'Оставить заявку',
+    imageAlt: 'Две банки Complex SW СУСТАВЫ',
+  },
+  composition: {
+    title: '«Complex SW СУСТАВЫ» — комплекс',
+    titleAccent: 'из 9 активных компонентов',
+    imageAlt: 'Мерная ложка с порошком',
+    button: 'Купить в 1 клик',
+    mobileButton: 'Заказать',
+    items: components.map(([title, text]) => ({ title, text })),
+  },
+  audience: {
+    title: 'Подходит для всех, кто заботиться о своем здоровье и думает о своем будущем заранее.',
+    imageAlt: 'Женщина идет по улице',
+    cards: ages.map(([title, text]) => ({ title, text })),
+  },
+  compare: {
+    title: 'Сравнение с другими продуктами',
+    paragraphs: [
+      '«Complex SW СУСТАВЫ» — это комплексная добавка, сочетающая высокие дозировки глюкозамина и хондроитина с противовоспалительной босвеллией и полным набором витаминов для защиты соединительной ткани.',
+      'В отличие от многих стандартных средств на рынке, он предлагает законченную систему «все в одной порции».',
+      'Ключевым преимуществом является наличие клинически значимых дозировок (например, 1250 мг глюкозамина), тогда как многие на рынке используют уменьшенные дозировки ради экономии.',
+    ],
+    imageAlt: 'Complex SW СУСТАВЫ',
+    leftFact: {
+      title: '1 порция = 17 обычных капсул',
+      text: 'Доза в 3 раза выше конкурентов. Достаточно одной порции в день',
+    },
+    rightFact: {
+      title: 'Курс на 1 месяц',
+      text: '30 порций = 130₽ в день',
+    },
+    button: 'Купить в 1 клик',
+  },
+  purchase: {
+    title: '«Complex SW СУСТАВЫ»\nдля опорно-двигательного аппарата',
+    price: '3 900 ₽',
+    meta: '420г. / 30 порций',
+    button: 'Купить в 1 клик',
+    productImageAlt: 'Complex SW СУСТАВЫ',
+    manualTitle: 'Инструкция и рекомендации по применению',
+    manualImageAlt: 'Банка, стакан и ложка',
+    manualSteps: ['1 ложка в день', 'Растворить в 200 мл воды', 'Принимать утром'],
+  },
+  faq: faq.map(([question, open]) => ({
+    question,
+    answer: 'Противопоказанием является индивидуальная непереносимость компонентов препарата.',
+    open,
+  })),
+  contact: {
+    title: 'Остались вопросы? Напишите нам',
+    emailLabel: 'Эл. почта',
+    email: 'info@test.ru',
+    messengersLabel: 'Мессенджеры',
+    formLabels: {
+      name: 'Имя',
+      phone: 'Телефон',
+      email: 'Эл. почта',
+    },
+    formPlaceholders: {
+      name: 'Как к вам обращаться',
+      phone: '+7 (___) __-__-__',
+      email: 'Ваша эл.почта',
+    },
+    agreement: 'Я даю свое согласие на обработку персональных данных',
+    button: 'Оставить заявку',
+    copyright: '© 2026, Оптисалт',
+    rights: 'Все права защищены',
+    disclaimer: 'БАД. Не является лекарственным средством. Требуется консультация специалиста',
+    offer: 'Оферта',
+    privacy: 'Политика конфиденциальности',
+    socials: {},
+  },
+}
