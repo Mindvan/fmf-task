@@ -1,3 +1,10 @@
+@media (min-width: 1921px) {
+  .benefits__line--top,
+  .benefits__line--bottom {
+    width: 100vw;
+  }
+}
+
 @media (min-width: 901px) and (max-width: 1500px) {
   .compare__copy-text {
     max-width: clamp(360px, calc(360px + (100vw - 900px) * 0.43), 620px);
